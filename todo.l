@@ -3,9 +3,11 @@
 (class +Task +Entity)               # starts the entity definition
 (rel nr     (+Need +Key +Number))   # defines a key, needed collect/query
 (rel nm     (+Sn +IdxFold +String)) # task name
-(rel tags   (+Sn +IdxFold +String)) # tags
-(rel status (+Ref +String))         # task status
+(rel tgs    (+Sn +IdxFold +String)) # tags
+(rel sts    (+Ref +String))         # task status
 (rel due    (+Ref +Date))           # task due date
+
+(setq *Rows 10)
 
 (de ui-main ()
     (app)
@@ -14,29 +16,29 @@
             (form NIL
                 (<grid> "----."
                     "Name" (gui 'nm '(+DbHint +TextField) '(nm +Task) 20)
-                    "Tags" (gui 'tags '(+DbHint +TextField) '(tags +Task) 20)
+                    "Tags" (gui 'tgs '(+DbHint +TextField) '(tgs +Task) 20)
                     (searchButton '(init> (: home query)))
                 )
-                (gui 'query '(+QueryChart) 5
+                (gui 'query '(+QueryChart) *Rows
                     '(goal
                         (quote
                             @Nm (val> (: home nm)) 
-                            @Tg (val> (: home tags)) 
+                            @Tg (val> (: home tgs)) 
                             (select (@@)
-                                ((nm +Task @Nm) (tags +Task @Tg))
+                                ((nm +Task @Nm) (tgs +Task @Tg))
 	    	    	            (tolr @Nm @@ nm)
-	    	    	            (part @Tg @@ tags)
+	    	    	            (part @Tg @@ tgs)
                             ) 
                          ) 
                      )
                      5
-                    '((This) (list (: nm) (: status) (: tags) (: due)))
+                    '((This) (list (: nm) (: sts) (: tgs) (: due)))
                     '((L D)
                         (cond
                             (D
                                 (mapc
                                     '((K V) (put!> D K V))
-                                    '(nm status tags due)
+                                    '(nm sts tgs due)
                                     L
                                 )
                                 D
@@ -56,10 +58,10 @@
                        (NIL "Due")
                     )
 
-                    (do 5
+                    (do *Rows
                         (<row> NIL
                             (gui 1 '(+TextField) 30)
-                            (gui 2 '(+DbHint +TextField)  '(status +Task) 10)
+                            (gui 2 '(+DbHint +TextField)  '(sts +Task) 10)
                             (gui 3 '(+TextField) 40)
                             (gui 4 '(+DateField) 20)
                             (gui 5 '(+DelRowButton)
@@ -69,14 +71,14 @@
                         )
                     )
                 ) 
-                (scroll 5)
+                (scroll *Rows)
             )
         )
     )
 )
 
 (de main ()
-    (pool "dingo.db")
+    (pool "tasks.db")
 )
 
 (de go ()
