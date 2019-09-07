@@ -4,7 +4,7 @@
 (rel nr     (+Need +Key +Number))   # defines a key, needed collect/query
 (rel nm     (+Sn +IdxFold +String)) # task name
 (rel tgs    (+Sn +IdxFold +String)) # tags
-(rel sts    (+Ref +String))         # task status
+(rel sts    (+Ref +Sn +String))     # task status
 (rel due    (+Ref +Date))           # task due date
 
 (setq *Rows 10)
@@ -14,20 +14,23 @@
     (action
         (html 0 Ttl "@lib.css" NIL
             (form NIL
-                (<grid> "----."
+                (<grid> "------."
                     "Name" (gui 'nm '(+DbHint +TextField) '(nm +Task) 20)
+                    "Status" (gui 'sts '(+DbHint +TextField) '(sts +Task) 20)
                     "Tags" (gui 'tgs '(+DbHint +TextField) '(tgs +Task) 20)
                     (searchButton '(init> (: home query)))
                 )
                 (gui 'query '(+QueryChart) *Rows
                     '(goal
                         (quote
-                            @Nm (val> (: home nm)) 
-                            @Tg (val> (: home tgs)) 
+                            @Nm (val> (: home nm))
+                            @Tg (val> (: home tgs))
+                            @St (val> (: home sts))
                             (select (@@)
-                                ((nm +Task @Nm) (tgs +Task @Tg))
-	    	    	            (tolr @Nm @@ nm)
-	    	    	            (part @Tg @@ tgs)
+                                ((nm +Task @Nm) (tgs +Task @Tg) (sts +Task @St))
+                                (tolr @Nm @@ nm)
+                                (tolr @St @@ sts)
+                                (part @Tg @@ tgs)
                             ) 
                          ) 
                      )
