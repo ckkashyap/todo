@@ -80,4 +80,8 @@
          (new (db: +Pos) '(+Pos) 'itm (db 'nr '+Item 4)  'pr 999  'cnt 20) ) ) )
 (commit)
 
+(obj ((+Tsk) nm "Task one") dsc "Get up")
+(obj ((+Tsk) nm "Task two") dsc "Stand up")
+(commit)
+
 # vi:et:ts=3:sw=3

@@ -18,7 +18,8 @@
                         (,"Orders" (and (may Order) "app/ord.l"))
                         (,"Items" (and (may Item) "app/item.l"))
                         (,"Customers/Suppliers" (and (may Customer) "app/cusu.l"))
-                        (,"Salutations" (and (may Customer) "app/sal.l")) )
+                        (,"Salutations" (and (may Customer) "app/sal.l"))
+                        (,"Tsk" (and (may Customer) "app/tsk.l")) )
                      (T ,"Report"
                         (,"Inventory" (and (may Report) "app/inventory.l"))
                         (,"Sales" (and (may Report) "app/sales.l")) )
@@ -41,7 +42,7 @@
             *Locales
             (mapcar car *Locales)
             ',"Language" )
-         (gui '(+Button) '"Change"
+         (gui '(+Button) ',"Change"
             '(let V (val> (field -1))
                (locale (car V) (cdr V) "app/loc/") ) ) )
       (loginForm) ) )
@@ -53,6 +54,9 @@
 # Search dialogs
 (de choSal (Dst)
    (choDlg Dst ,"Salutations" '(nm +Sal)) )
+
+(de choTsk (Dst)
+   (choDlg Dst ,"Tasks" '(nm +Tsk)) )
 
 (de choCuSu (Dst)
    (diaform '(Dst)
@@ -152,12 +156,12 @@
             (align ,"Price") )
          (do (cho)
             (<row> (alternating)
-               (gui 1 '(+DstButton) Dst) "A"
-               (gui 2 '(+NumField))  "B"
-               (gui 3 '(+ObjView +TextField) '(: nm)) "C"
-               (gui 4 '(+ObjView +TextField) '(: nm)) "D"
-               (gui 5 '(+TextField)) "E"
-               (gui 6 '(+FixField) 2)  "AAAA") ) )
+               (gui 1 '(+DstButton) Dst)
+               (gui 2 '(+NumField))
+               (gui 3 '(+ObjView +TextField) '(: nm))
+               (gui 4 '(+ObjView +TextField) '(: nm))
+               (gui 5 '(+TextField))
+               (gui 6 '(+FixField) 2) ) ) )
       (<spread>
          (scroll (cho))
          (newButton T Dst '(+Item)

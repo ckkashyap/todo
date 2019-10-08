@@ -33,6 +33,13 @@
 (dm hi> (Nm)
    (or (text (: hi) Nm) ,"Dear Sir or Madam,") )
 
+(class +Tsk +Entity)
+(rel nm (+Key +String))                # Task name
+(rel dsc (+String))                     # Description
+
+(dm url> (Tab)
+   (and (may Customer) (list "app/tsk.l" '*ID This)) )
+
 
 # Customer/Supplier
 (class +CuSu +Entity)
