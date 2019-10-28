@@ -57,8 +57,17 @@
    str "Running Lane 17"
    plz "1208"
    ort "Kaufstadt"
-   tel "37 4773 82534"
-   mob "37 129 276877"
+   tel "123"
+   mob "456"
+   em "tem@shoppers.tld" )
+(obj ((+CuSu) nr 4)
+   sal `(db 'nm '+Sal "Mr.")
+   nm "Miller2"
+   nm2 "Thomas Edwin"
+   str "Running Lane 17"
+   plz "1208"
+   ort "Kaufstadt2"
+   mob "37 129 276878"
    em "tem@shoppers.tld" )
 (commit)
 
@@ -77,11 +86,21 @@
       (list
          (new (db: +Pos) '(+Pos) 'itm (db 'nr '+Item 1)  'pr 29900  'cnt 1)
          (new (db: +Pos) '(+Pos) 'itm (db 'nr '+Item 2)  'pr 1250  'cnt 8)
-         (new (db: +Pos) '(+Pos) 'itm (db 'nr '+Item 4)  'pr 999  'cnt 20) ) ) )
+         (new (db: +Pos) '(+Pos) 'itm (db 'nr '+Item 4)  'pr 999  'cnt 20) 
+         (new (db: +Pos) '(+Pos) 'itm (db 'nr '+Item 6)  'pr 800  'cnt 30) ) ) )
 (commit)
 
-(obj ((+Tsk) nm "Task one") dsc "Get up")
-(obj ((+Tsk) nm "Task two") dsc "Stand up")
+(let T1 (new (db: +Task) '(+Task) 'nr 1 'dsc "Task One" 'nm "TASK1")
+  (put> T1 'upds
+    (list  (new (db: +Update) '(+Update) 'dsc "One Update 1")
+           (new (db: +Update) '(+Update) 'dsc "One Update 2")
+           (new (db: +Update) '(+Update) 'dsc "One Update 3")                         )))
+
+(let T2 (new (db: +Task) '(+Task) 'nr 2 'dsc "Task Two" 'nm "TASK2")
+  (put> T2 'upds
+    (list  (new (db: +Update) '(+Update) 'dsc "Two Update 1")
+           (new (db: +Update) '(+Update) 'dsc "Two Update 2")
+           (new (db: +Update) '(+Update) 'dsc "Two Update 3")                         )))
 (commit)
 
 # vi:et:ts=3:sw=3

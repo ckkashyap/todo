@@ -19,7 +19,7 @@
                         (,"Items" (and (may Item) "app/item.l"))
                         (,"Customers/Suppliers" (and (may Customer) "app/cusu.l"))
                         (,"Salutations" (and (may Customer) "app/sal.l"))
-                        (,"Tsk" (and (may Customer) "app/tsk.l")) )
+                        (,"Tasks" (and (may Customer) "app/tsk.l")) )
                      (T ,"Report"
                         (,"Inventory" (and (may Report) "app/inventory.l"))
                         (,"Sales" (and (may Report) "app/sales.l")) )
@@ -55,8 +55,51 @@
 (de choSal (Dst)
    (choDlg Dst ,"Salutations" '(nm +Sal)) )
 
-(de choTsk (Dst)
+(de choTsk2 (Dst)
    (choDlg Dst ,"Tasks" '(nm +Tsk)) )
+   
+
+(de choTsk (Dst)
+   (diaform '(Dst)
+      (<grid> "--.-."
+         ,"Number" (gui 'nr '(+Focus +Var +NumField) '*ItemNr 10)
+         (resetButton '(nr)) )
+      (gui 'query '(+QueryChart) (cho)
+         '(goal
+            (quote
+               @Nr (and *ItemNr (cons @ T))
+
+               (select (@@)
+                  ((nr +Task @Nr))
+
+                  #(tolr @Sup @@ sup nm) 
+                  
+               ) ) )
+         6
+         '((This) (list This (: nr) This This )) )
+      (<table> 'chart (choTtl ,"Items" 'nr '+Task)
+         (quote
+            (btn)
+            (align "#")
+            (NIL ,"Name")
+            (NIL ,"Description")
+            )
+         (do (cho)
+            (<row> (alternating)
+               (gui 1 '(+DstButton) Dst)
+               (gui 2 '(+NumField))
+               (gui 3 '(+ObjView +TextField) '(: nm))
+               (gui 4 '(+ObjView +TextField) '(: dsc))
+                ) ) )
+      #(<spread>
+      #   (scroll (cho))
+      #   (newButton T Dst '(+Item)
+      #      '(nr genKey 'nr '+Item)
+      #      'nm *ItemNm
+      #      'pr *ItemPr )
+      #   (cancelButton) ) 
+      
+      ) )
 
 (de choCuSu (Dst)
    (diaform '(Dst)

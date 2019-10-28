@@ -33,9 +33,18 @@
 (dm hi> (Nm)
    (or (text (: hi) Nm) ,"Dear Sir or Madam,") )
 
-(class +Tsk +Entity)
-(rel nm (+Key +String))                # Task name
-(rel dsc (+String))                     # Description
+(class +Task +Entity)
+(rel nr (+Need +Key +Number))
+(rel dsc (+Sn +IdxFold +String))
+(rel nm (+Sn +IdxFold +String))
+(rel upds (+List +Joint) tsk (+Update))
+
+(dm url> (Tab)
+   (and (may Customer) (list "app/tsk.l" '*ID This)) )
+
+(class +Update +Entity)
+(rel tsk (+Joint) upds (+Task) )
+(rel dsc (+String))            
 
 (dm url> (Tab)
    (and (may Customer) (list "app/tsk.l" '*ID This)) )
