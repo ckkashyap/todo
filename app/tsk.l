@@ -10,10 +10,7 @@
               '(put!> (: home obj) 'upds (cons (new! '(+Update) 'dsc (val> (field -1)) ) (get (: home obj) 'upds))) )  )
       (--)
       (gui '(+Set +E/R +Chart) '((L) (filter bool L)) '(upds : home obj) 1
-        '( (U I) (with U (list (: dsc) )) ) 
-        '( (L U)   (cond 
-                       (U (put!> U 'dsc (car L)) (and (; U dsc) U)  )
-                       (L (new! '(+Update) 'dsc (car L))))))
+        '( (U I) (with U (list (: dsc) )) ) )
       (<table> NIL NIL
          '((NIL "Updates"))
          (do 8
