@@ -44,7 +44,7 @@
 
 (class +Update +Entity)
 (rel tsk (+Joint) upds (+Task) )
-(rel dsc (+String))            
+(rel dsc (+Sn +IdxFold +String))            
 
 (dm url> (Tab)
    (and (may Customer) (list "app/tsk.l" '*ID This)) )
