@@ -7,7 +7,7 @@
 
          "Update" (gui '(+TextField) 30)
          (gui '(+Button) "Update"
-              '(new! '(+Update) 'dsc (val> (field -1))) ) ) 
+              '(put!> (: home obj) 'upds (cons (new! '(+Update) 'dsc (val> (field -1)) ) (get (: home obj) 'upds))) )  )
       (--)
       (gui '(+Set +E/R +Chart) '((L) (filter bool L)) '(upds : home obj) 1
         '( (U I) (with U (list (: dsc) )) ) 
@@ -19,5 +19,4 @@
          (do 8
             (<row> NIL
                (gui 1 '(+View +TextField) 100) 
-               
                )))))
