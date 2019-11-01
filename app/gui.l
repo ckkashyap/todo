@@ -60,11 +60,12 @@
    (diaform '(Dst)
       (<grid> "--.-."
          ,"Number" (gui 'nr '(+Focus +Var +NumField) '*ItemNr 10)
+         (searchButton '(init> (: home query)))
          (resetButton '(nr)) )
       (gui 'query '(+QueryChart) (cho)
          '(goal
             (quote
-               @Nr (and *ItemNr (cons @ T))
+               @Nr (and *ItemNr (cons @ @))
 
                (select (@@)
                   ((nr +Task @Nr))
@@ -73,8 +74,8 @@
                   
                ) ) )
          4
-         '((This) (list This (: nr) This This )) )
-      (<table> 'chart (choTtl ,"Items" 'nr '+Task)
+         '((This) (list This (: nr) (: nm)  (: dsc) )) )
+      (<table> 'chart  (choTtl ,"Items" 'nr '+Task)
          (quote
             (btn)
             (align "#")
@@ -85,8 +86,8 @@
             (<row> (alternating)
                (gui 1 '(+DstButton) Dst)
                (gui 2 '(+NumField))
-               (gui 3 '(+ObjView +TextField) '(: nm))
-               (gui 4 '(+ObjView +TextField) '(: dsc))
+               (gui 3 '(+TextField)) 
+               (gui 4 '(+TextField))
                 ) ) )
       (<spread>
          (scroll (cho))
