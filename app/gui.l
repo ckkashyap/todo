@@ -18,8 +18,8 @@
                         (,"Orders" (and (may Order) "app/ord.l"))
                         (,"Items" (and (may Item) "app/item.l"))
                         (,"Customers/Suppliers" (and (may Customer) "app/cusu.l"))
-                        (,"Salutations" (and (may Customer) "app/sal.l"))
-                        (,"Tasks" (and (may Customer) "app/tsk.l")) )
+                        (,"Tasks" (and (may Customer) "app/tsk.l"))
+                        (,"Salutations" (and (may Customer) "app/sal.l")) )
                      (T ,"Report"
                         (,"Inventory" (and (may Report) "app/inventory.l"))
                         (,"Sales" (and (may Report) "app/sales.l")) )
@@ -45,7 +45,7 @@
          (gui '(+Button) ',"Change"
             '(let V (val> (field -1))
                (locale (car V) (cdr V) "app/loc/") ) ) )
-       ) )
+      (loginForm) ) )
 
 (de stop ()
    (logout)
@@ -55,9 +55,6 @@
 (de choSal (Dst)
    (choDlg Dst ,"Salutations" '(nm +Sal)) )
 
-(de choTsk2 (Dst)
-   (choDlg Dst ,"Tasks" '(nm +Tsk)) )
-   
 
 (de choTsk (Dst)
    (diaform '(Dst)
