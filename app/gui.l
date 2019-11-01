@@ -45,7 +45,7 @@
          (gui '(+Button) ',"Change"
             '(let V (val> (field -1))
                (locale (car V) (cdr V) "app/loc/") ) ) )
-      (loginForm) ) )
+       ) )
 
 (de stop ()
    (logout)
@@ -75,7 +75,7 @@
                   #(tolr @Sup @@ sup nm) 
                   
                ) ) )
-         6
+         4
          '((This) (list This (: nr) This This )) )
       (<table> 'chart (choTtl ,"Items" 'nr '+Task)
          (quote
@@ -91,13 +91,13 @@
                (gui 3 '(+ObjView +TextField) '(: nm))
                (gui 4 '(+ObjView +TextField) '(: dsc))
                 ) ) )
-      #(<spread>
-      #   (scroll (cho))
-      #   (newButton T Dst '(+Item)
-      #      '(nr genKey 'nr '+Item)
-      #      'nm *ItemNm
-      #      'pr *ItemPr )
-      #   (cancelButton) ) 
+      (<spread>
+         (scroll (cho))
+         (newButton T Dst '(+Task)
+            '(nr genKey 'nr '+Task)
+            'nm *ItemNm
+            'pr *ItemPr )
+         (cancelButton) ) 
       
       ) )
 
