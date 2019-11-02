@@ -44,8 +44,9 @@
 
 # Entry point
 (de main ()
-   (call "mkdir" "-p" *Blob)
-   (pool *Pool *Dbs)
+   #(call "mkdir" "-p" *Blob)
+   #(pool *Pool *Dbs)
+   (pool "tasks.db")
    (load "app/init.l") )
 
 (de go (Rpc)
