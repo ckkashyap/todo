@@ -1,5 +1,6 @@
 # 08may16abu
 # (c) Software Lab. Alexander Burger
+(setq *Login T)
 
 ### GUI ###
 (de menu (Ttl . Prg)
@@ -13,28 +14,17 @@
                   (<menu>
                      (NIL (<hr>))
                      (T "Data"
-                        ("Tasks" (and (may Customer) "app/tsk.l")))
+                        ("Tasks" (and "app/tsk.l")))
                       ) )
                ((NIL NIL 'main)
                   (<div> @ (run Prg 1)) ) ) ) ) ) )
 
 (de work ()
    (setq *Url "!work")
-   (and (app) (setq *Menu 3))
+   (and (app) (setq *Menu 1))
    (menu "PicoLisp App"
-      (<h2> NIL "PicoLisp App")
-      (<img> "@img/7fachLogo.png" "7fach Logo" NIL "50%")
-      (----)
-      (form NIL
-         (gui '(+Init +Map +TextField)
-            (cons *Ctry *Lang)
-            *Locales
-            (mapcar car *Locales)
-            ',"Language" )
-         (gui '(+Button) ',"Change"
-            '(let V (val> (field -1))
-               (locale (car V) (cdr V) "app/loc/") ) ) )
-      (loginForm) ) )
+      ) 
+   )
 
 (de stop ()
    (logout)

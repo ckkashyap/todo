@@ -10,7 +10,7 @@
 (rel upds (+List +Joint) tsk (+Update))
 
 (dm url> (Tab)
-  (and (may Customer) (list "app/tsk.l" '*ID This)) )
+  (and (list "app/tsk.l" '*ID This)) )
 
 (class +Update +Entity)
 (rel tsk (+Joint) upds (+Task) )
@@ -18,7 +18,6 @@
 
 (dm url> (Tab)
    (and (may Customer) (list "bbbbbbbbb" '*ID This)) )
-  # (and (may Customer) (list "app/tsk.l" '*ID This)) )
 
 # Database sizes
 (dbs
