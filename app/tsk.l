@@ -11,13 +11,13 @@
       (--)
 
       (gui '(+Set +E/R +Chart) '((L) (filter bool L)) '(upds : home obj) 2
-        '( (U I) (with U (list (: dsc) (: dsc) )) ) )
+        '( (U I) (with U (list (: dsc) (: dt) )) ) )
       (<table> 'chart NIL
          '((NIL "Updates"))
          (do 2
             (<row> (alternating)
                (gui 1 '(+View +TextField) 100) 
-               (gui 2 '(+View +TextField) 100) 
+               (gui 2 '(+View +DateField) 100) 
                )))
   (<spread> (scroll 2))
 
