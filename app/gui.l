@@ -34,24 +34,27 @@
    (diaform '(Dst)
       (<grid> "--.-."
          ,"Number" (gui 'nr '(+Focus +Var +NumField) '*ItemNr 10)
+         ,"Status" (gui 'sts '(+DbHint +Var +TextField) '(sts +Task ) '*ItemStatus 10)
          (searchButton '(init> (: home query)))
          (resetButton '(nr)) )
       (gui 'query '(+QueryChart) (cho)
          '(goal
             (quote
                @Nr (and *ItemNr (cons @ @))
+               @St *ItemStatus
 
                (select (@@)
-                  ((nr +Task @Nr))
+                  ((nr +Task @Nr) (sts +Task @St) )
                ) ) )
-         4
-         '((This) (list This (: nr) (: ttl)  (: dt) )) )
+         5
+         '((This) (list This (: nr) (: ttl)  (: dt) (: sts) )) )
       (<table> 'chart  (choTtl ,"Items" 'nr '+Task)
          (quote
             (btn)
             ("em7 align" "#")
             ("em40 fixedWidth" "Title")
             ("em7 align" "Due Date")
+            ("em7 align" "Status")
             )
          (do (cho)
             (<row> (alternating)
@@ -59,6 +62,7 @@
                (gui 2 '(+NumField))
                (gui 3 '(+TextField)) 
                (gui 4 '(+DateField))
+               (gui 5 '(+TextField))
                 ) ) )
       (<spread>
          (scroll (cho))
