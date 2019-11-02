@@ -90,7 +90,7 @@
          (new (db: +Pos) '(+Pos) 'itm (db 'nr '+Item 6)  'pr 800  'cnt 30) ) ) )
 (commit)
 
-(let T1 (new (db: +Task) '(+Task) 'nr 1 'dsc "Task One" 'nm "TASK1")
+(let T1 (new (db: +Task) '(+Task) 'nr 1 'dsc "Task One" 'nm "TASK1AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
   (put> T1 'upds
     (list  (new (db: +Update) '(+Update) 'dsc "One Update 1")
            (new (db: +Update) '(+Update) 'dsc "One Update 2")
