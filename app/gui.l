@@ -11,11 +11,9 @@
                (<div> @
                   (expires)
                   (<menu>
-                     (,"Home" "!work")
-                     (,"logout" (and *Login "!stop"))
                      (NIL (<hr>))
-                     (T ,"Data"
-                        (,"Tasks" (and (may Customer) "app/tsk.l")))
+                     (T "Data"
+                        ("Tasks" (and (may Customer) "app/tsk.l")))
                       ) )
                ((NIL NIL 'main)
                   (<div> @ (run Prg 1)) ) ) ) ) ) )
@@ -55,9 +53,6 @@
 
                (select (@@)
                   ((nr +Task @Nr))
-
-                  #(tolr @Sup @@ sup nm) 
-                  
                ) ) )
          4
          '((This) (list This (: nr) (: nm)  (: dsc) )) )
