@@ -10,7 +10,7 @@
    "@lib/adm.l" )  # "@lib/boss.l"
 
 (setq
-   *Css '("@lib.css" "app/menu.css")
+   *Css '("@lib.css" "app/lib.css" "app/menu.css")
    *Pool "db/app/"
    *Blob "db/app/blob/"
    *Salt (16 . "$6$@1$") )

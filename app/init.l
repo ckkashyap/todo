@@ -19,13 +19,13 @@
 (commit)
 
 
-(let T1 (new (db: +Task) '(+Task) 'nr 1 'dsc "Task One" 'nm "TASK1AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
+(let T1 (new (db: +Task) '(+Task) 'nr 1 'ttl "TASK1" 'dt (date 2019 11 2))
   (put> T1 'upds
     (list  (new (db: +Update) '(+Update) 'dsc "One Update 1")
            (new (db: +Update) '(+Update) 'dsc "One Update 2")
            (new (db: +Update) '(+Update) 'dsc "One Update 3")                         )))
 
-(let T2 (new (db: +Task) '(+Task) 'nr 2 'dsc "Task Two" 'nm "TASK2")
+(let T2 (new (db: +Task) '(+Task) 'nr 2 'ttl "Task Two" 'dt (date 2019 11 1))
   (put> T2 'upds
     (list  (new (db: +Update) '(+Update) 'dsc "Two Update 1")
            (new (db: +Update) '(+Update) 'dsc "Two Update 2")

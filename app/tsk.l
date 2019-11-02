@@ -2,8 +2,8 @@
    (idForm ,"Tasks" '(choTsk) 'nr '+Tsk T '(may Delete) '((: nr))
       (--)
       (<grid> 2
-         "Name" (gui '(+E/R +Cue +TextField) '(nm : home obj) "Name" 40)
-         "Desc" (gui '(+E/R +TextField) '(dsc : home obj) 40) 
+         "Title" (gui '(+E/R +Cue +TextField) '(ttl : home obj) "Name" 40)
+         "Due" (gui '(+E/R +DateField) '(dt : home obj) 40) 
 
          "Update" (gui '(+TextField) 30)
          (gui '(+Button) "Update"
