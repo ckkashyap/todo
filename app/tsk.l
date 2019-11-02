@@ -7,7 +7,7 @@
 
          "Update" (gui '(+TextField) 60 2)
          (gui '(+Button) "Update"
-              '(put!> (: home obj) 'upds (new! '(+Update) 'dsc (val> (field -1)) ) ) )  )
+              '(put!> (: home obj) 'upds (new! '(+Update) 'dsc (val> (field -1)) 'dt (date)  ) ) )  )
       (--)
 
       (gui '(+Set +E/R +Chart) '((L) (filter bool L)) '(upds : home obj) 2
