@@ -1,6 +1,6 @@
 (class +Task +Entity)
 (rel nr (+Need +Key +Number))
-(rel ttl (+Sn +IdxFold +String))
+(rel ttl (+IdxFold +String))
 (rel sts (+Sn +IdxFold +String))
 (rel dt (+Need +Ref +Date))
 (rel upds (+List +Joint) tsk (+Update))
