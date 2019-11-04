@@ -37,7 +37,7 @@
          "Title" (gui 'ttl '(+Var +TextField)  '*ItemTitle 10)
          "Status" (gui 'sts '(+DbHint +Var +TextField) '(sts +Task ) '*ItemStatus 10)
          (searchButton '(init> (: home query)))
-         (resetButton '(nr)) )
+         (resetButton '(nr ttl sts)) )
       (gui 'query '(+QueryChart) (cho)
 	'(goal
             (quote
