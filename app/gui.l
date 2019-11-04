@@ -30,16 +30,6 @@
    (logout)
    (work) )
 
-(setq Goal '(goal
-            (quote
-               @Nr (and *ItemNr (cons @ @))
-               @St *ItemStatus
-               @Tl *ItemTitle
-
-               (select (@@)
-                  ((nr +Task @Nr) (sts +Task @St) (ttl +Task @Tl) )
-               ) ) ) )
-
 (de choTsk (Dst)
    (diaform '(Dst)
       (<grid> "--.-.--.--."
@@ -49,7 +39,15 @@
          (searchButton '(init> (: home query)))
          (resetButton '(nr)) )
       (gui 'query '(+QueryChart) (cho)
-	Goal
+	'(goal
+            (quote
+               @Nr (and *ItemNr (cons @ @))
+               @St *ItemStatus
+               @Tl *ItemTitle
+
+               (select (@@)
+                  ((nr +Task @Nr) (sts +Task @St) (ttl +Task @Tl) )
+               ) ) )
          4
          '((This) (list (: nr) This  (: dt) (: sts) )) )
       (<table> 'chart  (choTtl ,"Items" 'nr '+Task)
@@ -75,4 +73,3 @@
          (cancelButton) ) 
       
       ) )
-
