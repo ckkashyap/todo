@@ -32,11 +32,12 @@
 
 (de choTsk (Dst)
    (diaform '(Dst)
-      (<grid> "--"
+      (<grid> 10
          "Number" (gui 'nr '(+Focus +Var +NumField) '*ItemNr 10)
          "Title" (gui 'ttl '(+Var +TextField)  '*ItemTitle 10)
          "Tags" (gui 'tgs '(+Var +TextField)  '*ItemTags 10)
          "Status" (gui 'sts '(+DbHint +Var +TextField) '(sts +Task ) '*ItemStatus 10)
+         "Date" (gui 'dt '(+Var +DateField)  '*ItemDate 10)
          (searchButton '(init> (: home query)))
          (resetButton '(nr ttl tgs sts)) )
       (gui 'query '(+QueryChart) (cho)
@@ -46,9 +47,10 @@
                @St *ItemStatus
                @Tl *ItemTitle
                @Tg *ItemTags
+	       @Dt (and *ItemDate (cons (date 1900 1 1) @))
 
                (select (@@)
-                  ((nr +Task @Nr) (sts +Task @St) (ttl +Task @Tl) (tgs +Task @Tg) )
+                  ((nr +Task @Nr) (sts +Task @St) (ttl +Task @Tl) (tgs +Task @Tg) (dt +Task @Dt) )
                ) ) )
          5
          '((This) (list (: nr) This  (: dt) (: sts) (: tgs) )) )
