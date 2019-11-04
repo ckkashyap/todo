@@ -32,30 +32,33 @@
 
 (de choTsk (Dst)
    (diaform '(Dst)
-      (<grid> "--.-.--.--."
+      (<grid> "--"
          "Number" (gui 'nr '(+Focus +Var +NumField) '*ItemNr 10)
          "Title" (gui 'ttl '(+Var +TextField)  '*ItemTitle 10)
+         "Tags" (gui 'tgs '(+Var +TextField)  '*ItemTags 10)
          "Status" (gui 'sts '(+DbHint +Var +TextField) '(sts +Task ) '*ItemStatus 10)
          (searchButton '(init> (: home query)))
-         (resetButton '(nr ttl sts)) )
+         (resetButton '(nr ttl tgs sts)) )
       (gui 'query '(+QueryChart) (cho)
 	'(goal
             (quote
                @Nr (and *ItemNr (cons @ @))
                @St *ItemStatus
                @Tl *ItemTitle
+               @Tg *ItemTags
 
                (select (@@)
-                  ((nr +Task @Nr) (sts +Task @St) (ttl +Task @Tl) )
+                  ((nr +Task @Nr) (sts +Task @St) (ttl +Task @Tl) (tgs +Task @Tg) )
                ) ) )
-         4
-         '((This) (list (: nr) This  (: dt) (: sts) )) )
+         5
+         '((This) (list (: nr) This  (: dt) (: sts) (: tgs) )) )
       (<table> 'chart  (choTtl ,"Items" 'nr '+Task)
          (quote
             ("em7 align" "#")
             ("em40 fixedWidth" "Title")
             ("em7 align" "Due Date")
             ("em7 align" "Status")
+            ("em7 align" "Tags")
             )
          (do (cho)
             (<row> (alternating)
@@ -63,6 +66,7 @@
                (gui 2 '(+ObjView +TextField) '(: ttl) ) 
                (gui 3 '(+DateField))
                (gui 4 '(+TextField))
+               (gui 5 '(+TextField))
                 ) ) )
       (<spread>
          (scroll (cho))

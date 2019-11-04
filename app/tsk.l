@@ -5,6 +5,7 @@
          "Title" (gui '(+E/R +Cue +TextField) '(ttl : home obj) "Name" 40)
          "Due" (gui '(+E/R +DateField) '(dt : home obj) 40) 
          "Status" (gui '(+E/R +TextField) '(sts : home obj) 40) 
+         "Tags" (gui '(+E/R +TextField) '(tgs : home obj) 40) 
 
          "Update" (gui '(+TextField) 60 2)
          (gui '(+Button) "Update"

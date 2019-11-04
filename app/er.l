@@ -2,6 +2,7 @@
 (rel nr (+Need +Key +Number))
 (rel ttl (+IdxFold +String))
 (rel sts (+Sn +IdxFold +String))
+(rel tgs (+Sn +IdxFold +String))
 (rel dt (+Need +Ref +Date))
 (rel upds (+List +Joint) tsk (+Update))
 
