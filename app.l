@@ -37,14 +37,18 @@
 
 (de choTask (Dst)
    (diaform '(Dst)
-      (<grid> "--"
+      (<grid> 2 
           "Title" (gui 'ttl '(+DbHint +Var +TextField) '(ttl +Task) '*Title 100)
           "Contains" (gui 'tags '(+Var +Val +ListTextField) '*Tags1 '((L) (extract uppc L)) '(","," ") 100)
           "!Contains" (gui 'tags2 '(+Var +Val +ListTextField) '*Tags2 '((L) (extract uppc L)) '(","," ") 100)
           "Due Date" (gui 'date '(+Init +Var +DateField) (date) '*Due 100)
+          (<grid> 10
           (searchButton '(init> (: home query)))
-          (gui '(+Button) "Work" '(setq *Tags1 "WORK OPEN") )
-          (gui '(+Button) "Fun" '(setq *Tags1 "FUN OPEN") )
+          (gui '(+Button) "Work" '(prog (setq *Due (date)) (setq *Tags1 "WORK OPEN") ) )
+          (gui '(+Button) "Fun" '(prog (setq *Due (date)) (setq *Tags1 "FUN OPEN") ) )
+          (gui '(+Button) "+ 1 Week" '(prog (setq *Due (+ *Due 7)) ) )
+          (gui '(+Button) "- 1 Week" '(prog (setq *Due (- *Due 7)) ) )
+          )
       )
       (gui 'query '(+QueryChart) *ROWS 
         '(goal 
