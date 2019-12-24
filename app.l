@@ -19,8 +19,11 @@
                      ("Home" "!work")
                      (NIL (<hr>))
                      (T ""
-                        ("Tasks" (and "task.l")))
-                      ) )
+                        ("Tasks" (and "task.l"))
+                        ("Tags" (and "tag.l"))
+                     )
+                  ) 
+               )
                ((NIL NIL 'main)
                   (<div> @ (run Prg 1)) ) ) ) ) ) )
 
@@ -36,44 +39,59 @@
    (diaform '(Dst)
       (<grid> "--"
           "Title" (gui 'ttl '(+DbHint +Var +TextField) '(ttl +Task) '*Title 100)
-          "Tags" (gui 'tags '(+Var +Val +ListTextField) '*Tags '((L) (extract uppc L)) '(","," ") 100)
+          "Contains" (gui 'tags '(+Var +Val +ListTextField) '*Tags1 '((L) (extract uppc L)) '(","," ") 100)
+          "!Contains" (gui 'tags2 '(+Var +Val +ListTextField) '*Tags2 '((L) (extract uppc L)) '(","," ") 100)
+          "Due Date" (gui 'date '(+Init +Var +DateField) (date) '*Due 100)
           (searchButton '(init> (: home query)))
-          (gui '(+Button) "Work" '(setq *Tags "WORK OPEN") )
-          (gui '(+Button) "Fun" '(setq *Tags "FUN OPEN") )
+          (gui '(+Button) "Work" '(setq *Tags1 "WORK OPEN") )
+          (gui '(+Button) "Fun" '(setq *Tags1 "FUN OPEN") )
       )
       (gui 'query '(+QueryChart) *ROWS 
         '(goal 
            '(   @Ttl *Title
-                @Names *Tags
-                @Key (car *Tags)
+                @Tags1 *Tags1
+                @Tags2 *Tags2
+                @Key (car *Tags1)
+                @Tdy (cons *Due)
                 (select (@@)
-                   ((nm +TagNm @Key (nm +Tag) tsk))
+                   #((nm +TagNm @Key (nm +Tag) tsk))
+                   ((ttl +Task NIL))
                    (part @Ttl @@ ttl)
+                   (range @Tdy @@ dt)
                    (^ @ 
                       (fully 
                           '((Nm) 
                               (find 
-                                 '((This) (member Nm (: nm nm))) 
+                                 '((This) (= Nm (: nm nm))) 
                                  (; (-> @@) tgs) ) ) 
-                          (-> @Names)
+                          (-> @Tags1)
+                      )
+                   )
+                   (^ @ 
+                      (fully 
+                          '((Nm) 
+                              (not (find 
+                                 '((This) (= Nm (: nm nm))) 
+                                 (; (-> @@) tgs) ) ) )
+                          (-> @Tags2)
                       )
                    )
                 )
             )
         )
         2
-        '((This) (list This (glue " " (mapcar '((This) (: nm nm)) (: tgs) )) ))
+        '((This) (list This (: dt) ))
       )
-      (<table> NIL (choTtl "Entries" '+Task)
+      (<table> 'chart (choTtl "Entries" '+Task)
           (quote
-             ("em20 align" "Name")
-             ("em20 align" "Tags")
+             ("em20 align" "Title")
+             ("em2 align" "Due")
           )
 
           (do *ROWS 
-              (<row> NIL
+              (<row> (alternating)
                   (gui 1 '(+ObjView +TextField) '(: ttl))
-                  (gui 2 '(+TextField))
+                  (gui 2 '(+DateField))
               )
           )
       )
@@ -117,11 +135,13 @@
    )
 )
 
+(setq *DBNM "diary.db")
+
 (de main () 
     (load "init.l")
     (print-all)
     (prinl "READY"))
 
 (de go ()
-(pool "test.db")
+(pool *DBNM)
 (server 8080 "!work"))
